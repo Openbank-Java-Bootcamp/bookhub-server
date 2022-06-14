@@ -11,5 +11,7 @@ public interface BookServiceInterface {
 
     void saveBookByUser(BookDTOStatus dtoBook, String email);
 
-    List<Book> getBookByUser(String email);
+    List<Book> getBookByUser(String email,String status);
+
+    void deleteBookFromUser(long isbn, String logEmail);
 }

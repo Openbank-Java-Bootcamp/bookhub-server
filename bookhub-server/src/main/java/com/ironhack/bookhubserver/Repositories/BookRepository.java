@@ -18,6 +18,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Optional<Book> findByDbId(String id);
 
+    @Query(nativeQuery = true, value="SELECT db_id FROM book where id=:id")
+    Optional<String> findIdDBById(long id);
+
 
 
 

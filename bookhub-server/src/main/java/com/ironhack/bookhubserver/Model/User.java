@@ -1,5 +1,6 @@
 package com.ironhack.bookhubserver.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class User {
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}",
             message = "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.")
     private String password;
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     List<UserBook> userbook = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)

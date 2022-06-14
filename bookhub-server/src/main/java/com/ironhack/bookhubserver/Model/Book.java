@@ -1,5 +1,6 @@
 package com.ironhack.bookhubserver.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.bookhubserver.Utils.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,8 @@ public class Book {
     private String title;
     private String pages;
 
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     List<UserBook> userbook = new ArrayList<>();
 
@@ -37,6 +40,7 @@ public class Book {
         this.pages = pages;
         this.addDate = new Date();
     }
+
 
 
 

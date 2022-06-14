@@ -1,18 +1,25 @@
 package com.ironhack.bookhubserver.Model;
 
 import com.ironhack.bookhubserver.Utils.Status;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private int numPages;
@@ -24,4 +31,24 @@ public class UserBook {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
+
+    public UserBook(Status status, int numPages, User user, Book book) {
+        this.status = status;
+        this.numPages = numPages;
+        this.user = user;
+        this.book = book;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBook userBook = (UserBook) o;
+        return numPages == userBook.numPages && status == userBook.status && Objects.equals(user, userBook.user) && Objects.equals(book, userBook.book);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, numPages, user, book);
+    }
 }

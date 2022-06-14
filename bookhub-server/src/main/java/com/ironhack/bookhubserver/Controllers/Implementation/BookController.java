@@ -29,20 +29,32 @@ public class BookController implements BookControllerInterface {
     //post book
     @PostMapping("/books")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addBook(@Valid @RequestBody BookDTOStatus DTOBook){
+    public void addBook(@Valid @RequestBody BookDTOStatus DTOBookStatus){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String logEmail = auth.getName();
         log.info("User asking for books: " +logEmail);
-        log.info("Status parameter :" + DTOBook);
-        bookServiceInterface.saveBookByUser(DTOBook, logEmail);
+        log.info("Status parameter :" + DTOBookStatus);
+        bookServiceInterface.saveBookByUser(DTOBookStatus, logEmail);
     }
 
-    @GetMapping("/books")
+    @GetMapping("/books/{status}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Book> getUserBook(){
+    public List<Book> getUserBookStatus(@PathVariable String status){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String logEmail = auth.getName();
         log.info("User asking for books: " +logEmail);
-       return  bookServiceInterface.getBookByUser(logEmail);
+       return bookServiceInterface.getBookByUser(logEmail, status);
     }
+
+    //falta get pages, delete y patch
+    @DeleteMapping("books/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable long id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String logEmail = auth.getName();
+        log.info("User asking for books: " +logEmail);
+        bookServiceInterface.deleteBookFromUser(id, logEmail);
+    }
+
+
 }
