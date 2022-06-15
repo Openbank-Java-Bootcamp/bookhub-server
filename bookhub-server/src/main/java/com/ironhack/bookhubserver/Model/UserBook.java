@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -32,11 +34,17 @@ public class UserBook {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    private String dateAdd;
+
     public UserBook(Status status, int numPages, User user, Book book) {
         this.status = status;
         this.numPages = numPages;
         this.user = user;
         this.book = book;
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fechaActual = sdf.format(todayDate);
+        dateAdd = fechaActual;
     }
 
     @Override

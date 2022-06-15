@@ -56,6 +56,7 @@ public class RatingsController implements RatingControllerInterface {
     }
 
     @PatchMapping("/rating/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Rating updateRating(@RequestBody UpdateRatingDTO updateRatingDTO, @PathVariable long id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String logEmail = auth.getName();

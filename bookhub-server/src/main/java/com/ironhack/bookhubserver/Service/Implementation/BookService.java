@@ -66,8 +66,6 @@ public class BookService implements BookServiceInterface {
             user.setUserbook(newUserBooks);
             userRepository.save(user);
             //update book
-            bookDB.get().getUserbook().add(newUserBook);
-            bookRepository.save(bookDB.get());
         }else{
             //aqui acabo lo viejo
             for (int i = 0; i< userBooks.size(); i++){
@@ -93,8 +91,8 @@ public class BookService implements BookServiceInterface {
                 user.setUserbook(userBooks);
                 userRepository.save(user);
                 //UPDATE BOOK
-                bookDB.get().getUserbook().add(newUserBook);
-                bookRepository.save(bookDB.get());
+                //bookDB.get().getUserbook().add(newUserBook);
+                //bookRepository.save(bookDB.get());
             }else if (userHasIT && userHastItDiffStatus){
                 userHastItDiffStatus = true;
                 userBooks.get(index).setStatus(Status.valueOf(dtoBook.getStatus()));
@@ -127,6 +125,7 @@ public class BookService implements BookServiceInterface {
             if (userBookDB.isPresent()){
                 if (userBooks.size() != 0){
                     int index = -1;
+                    //remove the user
                     for (int i = 0; i < userBooks.size(); i++) {
                         if (userBooks.get(i).equals(userBookDB.get())){
                             index = i;
@@ -136,8 +135,19 @@ public class BookService implements BookServiceInterface {
                         userBooks.remove(index);
                         userRepository.save(user);
                     }
+                    int index2 = -1;
+                    for (int i = 0; i < bookDB.get().getUserbook().size(); i++) {
+                        if (bookDB.get().getUserbook().get(i).equals(userBookDB.get())){
+                            index = i;
+                        }
+                    }
+                    if(index2 != -1) {
+                        bookDB.get().getUserbook().remove(index2);
+                        bookRepository.save(bookDB.get());
+                    }
                 }
-                userBooksRepository.delete(userBookDB.get());
+                userBooksRepository.deleteById(userBookDB.get().getId());
+                //userBooksRepository.delete(userBookDB.get());
             }
         }
     }

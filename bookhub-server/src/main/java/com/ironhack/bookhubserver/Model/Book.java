@@ -22,7 +22,7 @@ public class Book {
     private Long id;
     private String dbId;
     private Date addDate;
-
+    @Column(length = 65555)
     private String imagen;
     private String title;
     private String pages;

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class Rating {
 
     private String comment;
     private int points;
-    private Date publicationDate;
+    private String publicationDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,7 +37,10 @@ public class Rating {
     public Rating(String comment, int points, Book book, User user){
         this.comment = comment;
         this.points = points;
-        this.publicationDate = new Date();
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fechaActual = sdf.format(todayDate);
+        this.publicationDate = fechaActual;
         this.book = book;
         this.user = user;
     }
