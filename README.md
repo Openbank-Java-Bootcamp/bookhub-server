@@ -29,7 +29,18 @@ with a realation one to many with Book and User.
 
 ## Server routes table(Method, Route or URL, Description as columns)
 
-
+Method  | Route | Description
+------------- | ------------- | -------------
+  POST   | /api/books | creation of new book (BOOK as body request)
+GET | /api/books/{status} | get all books of a user based on status
+DELETE | /api/books/{id} | delation of an userbook from an specific user based on the book id
+PATCH | /api//bookuser/status/{id} | modify the status of a book (staus as body request)
+PATCH | /api/books/pages/{id} | modify the number of pages read of a book (pages as body request)
+GET | /api/bookuser/{id} | get an userbook  of an specific user based on the book id 
+POST | /api//ratings/{bookId} | creation of a new review 
+GET | /api//ratings | get all the reviews of a book 
+PATCH | /api/rating/{id} | edit comment and points of a review (comment and points as body request) 
+DELETE | /api/ratings/{id} | deletation of a review 
 
 ## Future Work
 In a future we will improve the code quality.
