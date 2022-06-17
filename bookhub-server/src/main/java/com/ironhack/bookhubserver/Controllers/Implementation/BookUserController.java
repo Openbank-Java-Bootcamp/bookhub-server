@@ -22,8 +22,8 @@ public class BookUserController implements BookUserControllerInterface {
     @Autowired
     BookUserServiceInterface bookUserServiceInterface;
 
-    //edit number of read pages
 
+    //edit pages
     @PatchMapping("/books/pages/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void editPages(@PathVariable int id, @RequestBody @Valid BookDTOPages bookDT0Pages){
@@ -33,6 +33,7 @@ public class BookUserController implements BookUserControllerInterface {
         bookUserServiceInterface.editPagesBook(id, bookDT0Pages, logEmail);
     }
 
+    //get userbook by id
     @GetMapping("/bookuser/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserBook getUserBook(@PathVariable long id){
@@ -42,6 +43,7 @@ public class BookUserController implements BookUserControllerInterface {
         return bookUserServiceInterface.getUserBook(id, logEmail);
     }
 
+    //edit status
     @PatchMapping("/bookuser/status/{id}")
     public UserBook editStatus(@PathVariable long id, @RequestBody @Valid DTOUserBookStatus dtoUserBookStatus){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

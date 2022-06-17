@@ -29,6 +29,7 @@ public class BookUserService implements BookUserServiceInterface {
     @Autowired
     UserRepository userRepository;
 
+    //edit pages read in a userbook
     public void editPagesBook(long id, BookDTOPages bookDT0Pages, String logEmail){
         Optional<Book> bookDB = bookRepository.findById(id);
         User user = userRepository.findByEmail(logEmail);
@@ -41,6 +42,7 @@ public class BookUserService implements BookUserServiceInterface {
         }
     }
 
+    //edit status in a userbook
     public UserBook getEditStatus(long id, String logEmail, String status){
         Optional<Book> bookDB = bookRepository.findById(id);
         User user = userRepository.findByEmail(logEmail);
@@ -54,6 +56,7 @@ public class BookUserService implements BookUserServiceInterface {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No userbook foud");
     }
 
+    //get an user book by book and user
     public UserBook getUserBook(long id, String logEmail){
         Optional<Book> bookDB = bookRepository.findById(id);
         User user = userRepository.findByEmail(logEmail);

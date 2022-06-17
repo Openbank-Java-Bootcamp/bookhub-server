@@ -56,10 +56,6 @@ public class RatingService implements RatingServiceInterface {
            newRating = new Rating(ratingDTO.getComment(), ratingDTO.getPoints(), bookDB.get(), user);
            ratingRepository.save(newRating);
        }
-       //we update the user with the ratings new info
-        //List<Rating> userRatings= user.getRatings();
-        //userRatings.add(newRating);
-        //user.setRatings(userRatings);
         userRepository.save(user);
 
     }

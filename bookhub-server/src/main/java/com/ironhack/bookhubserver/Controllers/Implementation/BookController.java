@@ -19,9 +19,7 @@ import java.util.List;
 @RequestMapping("/api")
 @Slf4j
 public class BookController implements BookControllerInterface {
-    //delete book
-    //edit book status
-    //edit book pages read
+
 
     @Autowired
     BookServiceInterface bookServiceInterface;
@@ -37,6 +35,7 @@ public class BookController implements BookControllerInterface {
         bookServiceInterface.saveBookByUser(DTOBookStatus, logEmail);
     }
 
+    //get book by Status
     @GetMapping("/books/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<Book> getUserBookStatus(@PathVariable String status){
@@ -46,7 +45,7 @@ public class BookController implements BookControllerInterface {
        return bookServiceInterface.getBookByUser(logEmail, status);
     }
 
-    //falta get pages, delete y patch
+    //delete userbook by id
     @DeleteMapping("books/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable long id){

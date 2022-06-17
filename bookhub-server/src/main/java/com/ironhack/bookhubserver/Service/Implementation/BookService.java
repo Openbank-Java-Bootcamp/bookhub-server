@@ -32,6 +32,7 @@ public class BookService implements BookServiceInterface {
     UserBookRepository userBooksRepository;
 
 
+    //Saving a book (consecuence of adding a rating)
     public void saveBook(BookDTOStatus dtoBook){
         if (bookRepository.findAll().size() != 0) {
             Optional<Book> bookDB = bookRepository.findByDbId(dtoBook.getId());
@@ -46,6 +47,11 @@ public class BookService implements BookServiceInterface {
         }
     }
 
+    //Saving a book (added by a user)
+    //CASE1: no added yet in the database
+    //CASE2: already in the database but the user does not have it
+    //CASE 3: already in the database and the user have it in another state
+    //CASE 4: already in the database and the user have it in that state (http badrequest)
     public void saveBookByUser(BookDTOStatus dtoBook, String email) {
         Optional<Book> bookDB = bookRepository.findByDbId(dtoBook.getId());
         User user = userRepository.findByEmail(email);
@@ -103,6 +109,7 @@ public class BookService implements BookServiceInterface {
 
     }
 
+    //get the books of a user in a status
     public List<Book> getBookByUser(String email, String status) {
         User user = userRepository.findByEmail(email);
         List<UserBook> userBooks = user.getUserbook();
@@ -116,6 +123,7 @@ public class BookService implements BookServiceInterface {
         return books;
     }
 
+    //delete a book the user has save (userbook) by id.
     public void deleteBookFromUser(long isbn, String logEmail){
         Optional<Book> bookDB = bookRepository.findById(isbn);
         User user = userRepository.findByEmail(logEmail);

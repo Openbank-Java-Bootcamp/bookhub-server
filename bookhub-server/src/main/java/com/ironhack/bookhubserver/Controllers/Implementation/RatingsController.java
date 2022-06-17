@@ -46,6 +46,7 @@ public class RatingsController implements RatingControllerInterface {
         ratingServiceInterface.saveRating(ratingDTO, logEmail);
     }
 
+    //delete rating by id
     @DeleteMapping("/ratings/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteRating(@PathVariable long id){
@@ -55,6 +56,7 @@ public class RatingsController implements RatingControllerInterface {
         ratingServiceInterface.deleteRating(id, logEmail);
     }
 
+    //edit rating by id
     @PatchMapping("/rating/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Rating updateRating(@RequestBody UpdateRatingDTO updateRatingDTO, @PathVariable long id){
