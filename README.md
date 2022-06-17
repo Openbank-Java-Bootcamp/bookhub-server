@@ -3,7 +3,7 @@
 
 Book-hub is an app where the users can rate books. All the books are being provided by Google Books API, so the variety of those is quite extense. In addition, the user can save the book he/she likes under 3 different categories: READ (he has already read it), TBR (is planning on read it on the future) and READING (is currently reading it). When the last category is selected, the user must provided the page he/she is on, sho we can track his/her progress.
 
-## User Stories(If available)
+## User Stories
 
 As a user I want to search for books so I can save/read them. 
 
