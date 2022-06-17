@@ -37,10 +37,12 @@ DELETE | /api/books/{id} | delation of an userbook from an specific user based o
 PATCH | /api//bookuser/status/{id} | modify the status of a book (staus as body request)
 PATCH | /api/books/pages/{id} | modify the number of pages read of a book (pages as body request)
 GET | /api/bookuser/{id} | get an userbook  of an specific user based on the book id 
-POST | /api//ratings/{bookId} | creation of a new review 
-GET | /api//ratings | get all the reviews of a book 
+POST | /api/ratings/{bookId} | creation of a new review 
+GET | /api/ratings | get all the reviews of a book 
 PATCH | /api/rating/{id} | edit comment and points of a review (comment and points as body request) 
 DELETE | /api/ratings/{id} | deletation of a review 
+POST | /auth/singup|save an user
+GET | /auth/verify | verify user credetials
 
 ## Future Work
 In a future we will improve the code quality.
